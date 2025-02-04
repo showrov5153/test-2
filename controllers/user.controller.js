@@ -11,6 +11,7 @@ export const SignUp_Controller = async (req, res) => {
     if (!name || !telegramNumber || !email || !password) {
       return res.status(400).json({ message: " please fillup your details" });
     }
+console.log(1);
 
     // Check if email already exists
     const existingEmail = await User.findOne({ email });
@@ -19,7 +20,7 @@ export const SignUp_Controller = async (req, res) => {
         .status(400)
         .json({ message: "User already registered with this email" });
     }
-
+    console.log(2);
     // Check if telegram number already exists
     const existingNumber = await User.findOne({ telegramNumber });
     if (existingNumber) {
@@ -27,7 +28,7 @@ export const SignUp_Controller = async (req, res) => {
         .status(400)
         .json({ message: "Telegram number already exists" });
     }
-
+    console.log(3);
     // Create new user
     const newUser = new User({
       name,
@@ -35,10 +36,10 @@ export const SignUp_Controller = async (req, res) => {
       email,
       password,
     });
-
+    console.log(4);
     // Save new user to database
     await newUser.save();
-
+    console.log(5);
     // Generate JWT token
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_TOKEN, {
       expiresIn: "7d",
