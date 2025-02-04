@@ -5,6 +5,8 @@ import User from "../models/user.model.js";
 export const SignUp_Controller = async (req, res) => {
   try {
     const { name, telegramNumber, email, password } = req.body;
+    console.log(req.body);
+    
 
     if (!name || !telegramNumber || !email || !password) {
       return res.status(400).json({ message: " please fillup your details" });
