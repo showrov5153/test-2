@@ -19,7 +19,7 @@ app.use("/api", User_Router);
 
 // Default route
 app.get("/", (req, res) => {
-  res.send("Welcome to the Express app!");
+  res.send("2nd time express is running");
 });
 
 // Set server port
