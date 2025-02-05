@@ -6,14 +6,12 @@ export const SignUp_Controller = async (req, res) => {
   try {
     const { name, telegramNumber, email, password } = req.body;
     console.log(req.body);
-    
 
     if (!name || !telegramNumber || !email || !password) {
       return res.status(400).json({ message: " please fillup your details" });
     }
-console.log(1);
+    console.log(1);
 
-    // Check if email already exists
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {
       return res
@@ -298,12 +296,10 @@ export const addBalance = async (req, res) => {
     await userData.save();
 
     // Respond with success message
-    res
-      .status(200)
-      .json({
-        message: "Balance added successfully.",
-        balance: userData.balance,
-      });
+    res.status(200).json({
+      message: "Balance added successfully.",
+      balance: userData.balance,
+    });
   } catch (error) {
     res
       .status(500)
@@ -334,15 +330,15 @@ export const getUsers = async (req, res) => {
     const userId = req.user.id; // Get user ID from req.user (assuming authentication middleware is used)
 
     // Fetch user data from database by ID
-    const user = await User.findById(userId).select('-password -otp'); // Exclude password and otp fields
+    const user = await User.findById(userId).select("-password -otp"); // Exclude password and otp fields
 
     if (!user) {
-        return res.status(404).json({ message: 'User not found.' });
+      return res.status(404).json({ message: "User not found." });
     }
 
     res.json({ user });
-} catch (error) {
+  } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error.' });
-}
-}
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
