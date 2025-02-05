@@ -10,6 +10,8 @@ export const SignUp_Controller = async (req, res) => {
     if (!name || !telegramNumber || !email || !password) {
       return res.status(400).json({ message: " please fillup your details" });
     }
+    console.log(process.env.MONGODB_URL);
+    
     console.log(1);
 
     const existingEmail = await User.findOne({ email });
